@@ -36,13 +36,24 @@ String::tokens = ->
     ONELINECOMMENT: /\/\/.*/g
     MULTIPLELINECOMMENT: /\/[*](.|\n)*?[*]\//g
     COMPARISONOPERATOR: /[<>=!]=|[<>]/g
-    ONECHAROPERATORS: /([*\/=()&|;:,{}[\]])/g
+    ADDSUBOPERATORS: /[+-]/g
+    MULTDIVOPERATORS: /[*\/]/g
+    ONECHAROPERATORS: /([=()&|;:,{}[\]])/g
 
   RESERVED_WORD =
-    p:    "P"
-    "if": "IF"
+    p: "P"
+    #const = "CONST"
+    #var = "VAR"
+    #procedure = "PROCEDURE"
+    call: "CALL"
+    begin: "BEGIN"
+    end: "END"
+    if: "IF"
     then: "THEN"
-
+    while: "WHILE"
+    do: "DO"
+    odd: "ODD"
+     
   # Make a token object.
   make = (type, value) ->
     type: type
@@ -93,9 +104,18 @@ String::tokens = ->
       result.push make("STRING",
                         getTok().replace(/^["']|["']$/g, ""))
 
+    # add y sub operators
+    else if m = tokens.ADDSUBOPERATORS.bexec(this)
+      result.push make("ADDSUBOPERATORS", getTok())
+      
+    # mult y div operators
+    else if m = tokens.MULTDIVOPERATORS.bexec(this)
+      result.push make("MULTDIVOPERATORS", getTok())
+
     # comparison operator
     else if m = tokens.COMPARISONOPERATOR.bexec(this)
       result.push make("COMPARISON", getTok())
+      
     # single-character operator
     else if m = tokens.ONECHAROPERATORS.bexec(this)
       result.push make(m[0], getTok())
@@ -115,7 +135,20 @@ parse = (input) ->
             lookahead.value + "' near '" +
             input.substr(lookahead.from) + "'"
     return
-
+  
+  block = ->
+    result = null
+    if lookahead and lookahead.type is "CONST"
+      match "CONST"
+      left = factor()
+      match "="
+      right = factor()
+      result =
+        type: "CONST"
+        left: left
+        right: right
+    result
+    
   statements = ->
     result = [statement()]
     while lookahead and lookahead.type is ";"
@@ -143,6 +176,19 @@ parse = (input) ->
       result =
         type: "P"
         value: right
+    else if lookahead and lookahead.type is "CALL"
+      match "CALL"
+      right = factor()
+      result =
+        type: "CALL"
+        right: right
+    else if lookahead and lookahead.type is "BEGIN"
+      match "BEGIN"
+      left = statements()
+      match "END"
+      result =
+        type: "BEGIN"
+        left: left
     else if lookahead and lookahead.type is "IF"
       match "IF"
       left = condition()
@@ -152,6 +198,15 @@ parse = (input) ->
         type: "IF"
         left: left
         right: right
+    else if lookahead and lookahead.type is "WHILE"
+      match "WHILE"
+      left = condition()
+      match "DO"
+      right = statement()
+      result =
+        type: "WHILE"
+        left: left
+        right: right
     else # Error!
       throw "Syntax Error. Expected identifier but found " +
         (if lookahead then lookahead.value else "end of input") +
@@ -159,34 +214,43 @@ parse = (input) ->
     result
 
   condition = ->
-    left = expression()
-    type = lookahead.value
-    match "COMPARISON"
-    right = expression()
-    result =
-      type: type
-      left: left
-      right: right
+    if lookahead and lookahead.type is "ODD"
+      match "ODD"
+      right = expression()
+      result =
+        type: "ODD"
+        right: right
+    else
+      left = expression()
+      type = lookahead.value
+      match "COMPARISON"
+      right = expression()
+      result =
+        type: type
+        left: left
+        right: right
     result
 
   expression = ->
     result = term()
-    if lookahead and lookahead.type is "+"
-      match "+"
-      right = expression()
+    while lookahead and lookahead.type is "ADDSUBOPERATORS"
+      type = lookahead.value
+      match "ADDSUBOPERATORS"
+      right = term()
       result =
-        type: "+"
+        type: type
         left: result
         right: right
     result
 
   term = ->
     result = factor()
-    if lookahead and lookahead.type is "*"
-      match "*"
+    if lookahead and lookahead.type is "MULTDIVOPERATORS"
+      type =  lookahead.value
+      match "MULTDIVOPERATORS"
       right = term()
       result =
-        type: "*"
+        type: type
         left: result
         right: right
     result
