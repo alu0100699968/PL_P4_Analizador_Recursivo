@@ -1,0 +1,224 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700)
+
+body
+  padding: 50px
+  font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-weight: 300
+  background-image: url("../img/bck.png")
+  background-repeat: no-repeat
+  background-size: cover
+  background-color: #070433
+
+h1, h2, h3, h4, h5, h6
+  color: white
+  margin: 0 0 20px
+
+p, ul, ol, pre, dl, i
+  margin: 0 0 20px
+  color: black
+  font-weight: bold
+
+form
+  display: inline
+
+h1, h2, h3
+  line-height: 1.1
+
+h1
+  font-size: 28px
+
+h2
+  color: #393939
+
+h3, h4, h5, h6
+  color: #494949
+
+a
+  color: white
+  font-weight: 400
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+  small
+    font-size: 11px
+    color: #777
+    margin-top: -0.6em
+    display: block
+
+.wrapper
+  width: 860px
+  margin: 0 auto
+
+blockquote
+  margin: 0
+  padding: 0 0 0 20px
+  font-style: italic
+
+code
+  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal
+  color: #333
+  font-size: 12px
+
+pre
+  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal
+  color: #333
+  font-size: 12px
+  padding: 8px 15px
+  background: #f8f8f8
+  overflow-x: auto
+
+table
+  width: 40%
+  border-collapse: collapse
+  border: 1px solid black
+  color: black
+
+tr.error
+  border: 2px solid red
+
+dt
+  color: #444
+  font-weight: 700
+
+img
+  max-width: 100%
+
+header
+  width: 270px
+  float: left
+  position: fixed
+  ul
+    list-style: none
+    height: 40px
+    padding: 0
+    background: #eee
+    background: -moz-linear-gradient(top, #f8f8f8 0%, #dddddd 100%)
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f8f8f8), color-stop(100%, #dddddd))
+    background: -webkit-linear-gradient(top, #f8f8f8 0%, #dddddd 100%)
+    background: -o-linear-gradient(top, #f8f8f8 0%, #dddddd 100%)
+    background: -ms-linear-gradient(top, #f8f8f8 0%, #dddddd 100%)
+    background: linear-gradient(top, #f8f8f8 0%, #dddddd 100%)
+    box-shadow: inset #fff 0 1px 0, inset rgba(0, 0, 0, 0.03) 0 -1px 0
+    width: 270px
+  li
+    width: 89px
+    float: left
+    height: 40px
+  ul a
+    line-height: 1
+    font-size: 11px
+    color: #999
+    display: block
+    text-align: center
+    padding-top: 6px
+    height: 40px
+
+strong
+  color: #222
+  font-weight: 700
+
+header ul
+  li + li
+    width: 88px
+    + li
+      width: 89px
+  a strong
+    font-size: 14px
+    display: block
+    color: #222
+
+section
+  width: 500px
+  float: right
+  padding-bottom: 50px
+
+small
+  font-size: 11px
+
+hr
+  background: #e5e5e5
+  height: 1px
+  margin: 0 0 20px
+
+footer
+  width: 270px
+  float: left
+  position: fixed
+  bottom: 50px
+
+div
+  &#enlaces
+    bottom: 80px
+    width: 80px
+    border: 2px solid #FFFFFF
+    border-radius: 10px
+    background: #787878
+    text-align: center
+    float: left
+  &#autores
+    width: 180px
+    border: 2px solid #FFFFFF
+    border-radius: 10px
+    background: #787878
+    text-align: center
+    float: right
+  &#cajita
+    width: 512px
+    border: 2px solid #a1a1a1
+    border-radius: 10px
+    background: #FFFFFF
+    overflow: hidden
+  &#upload
+    width: 130px
+    height: 22px
+    overflow: hidden
+
+#INPUT
+  width: 512px
+  height: 200px
+
+#OUTPUT
+  text-align: left
+
+@media print, screen and (max-width: 960px)
+  div.wrapper
+    width: auto
+    margin: 0
+  header, section, footer
+    float: none
+    position: static
+    width: auto
+  header
+    padding-right: 320px
+  section
+    padding: 20px 0
+    margin: 0 0 20px
+  header
+    a small
+      display: inline
+    ul
+      position: absolute
+      right: 50px
+      top: 52px
+
+@media print, screen and (max-width: 720px)
+  body
+    word-wrap: break-word
+  header
+    padding: 0
+    ul, p.view
+      position: static
+  pre, code
+    word-wrap: normal
+
+@media print, screen and (max-width: 480px)
+  body
+    padding: 15px
+  header ul
+    display: none
+
+@media print
+  body
+    padding: 0.4in
+    font-size: 12pt
+    color: #444s
