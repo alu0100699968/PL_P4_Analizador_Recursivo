@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Tests Analizador</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/tests/mocha.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./mainfortests.coffee" type="text/coffeescript"></script>
+    <script src="https://raw.githubusercontent.com/jashkenas/coffeescript/master/extras/coffee-script.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <script>mocha.setup('tdd')</script>
+
+    <script src="blanket.js"
+      data-cover-adapter="mocha-blanket.js"></script>
+    <script type="text/coffeescript" src="./mainfortests.coffee" data-cover></script>
+
+
+    <script src="tests.coffee" type="text/coffeescript"></script>
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>
