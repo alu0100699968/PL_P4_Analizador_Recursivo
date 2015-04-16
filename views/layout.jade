@@ -5,7 +5,26 @@ html
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
     script(src='/javascripts/main.coffee', type='text/coffeescript')
+    script(src='/javascripts/actions.coffee', type='text/coffeescript')
     script(src='https://raw.githubusercontent.com/jashkenas/coffeescript/master/extras/coffee-script.js', type='text/javascript')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(type='text/javascript').
+      function dump(fileName) {
+        $.get(fileName, function (data) {
+          $("#INPUT").val(data);
+        });
+      };
+      document.getElementById('files').addEventListener('change', CopyMe, false);
+      function CopyMe(evt) {
+        var file = evt.target.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function(e) { 
+            INPUT.innerHTML = e.target.result;
+          }
+          var c = reader.readAsText(file);
+        }
+        else { alert("Failed to load file"); }
+      }
   body
     block content
