@@ -1,1 +1,1 @@
-web: nodemon bin/www.coffee
+web: coffee bin/www.coffee
