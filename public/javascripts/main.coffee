@@ -1,5 +1,5 @@
 main = ()->
-  source = original.value
+  source = INPUT.value
   try
     result = JSON.stringify(parse(source), null, 2)
   catch result
@@ -36,7 +36,7 @@ String::tokens = ->
     ONELINECOMMENT: /\/\/.*/g
     MULTIPLELINECOMMENT: /\/[*](.|\n)*?[*]\//g
     COMPARISONOPERATOR: /[<>=!]=|[<>]/g
-    ONECHAROPERATORS: /([-+*\/=()&|;:,{}[\]])/g
+    ONECHAROPERATORS: /([*\/=()&|;:,{}[\]])/g
 
   RESERVED_WORD =
     p:    "P"

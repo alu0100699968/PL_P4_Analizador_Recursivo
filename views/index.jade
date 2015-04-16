@@ -1,5 +1,28 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Analizador L&#233;xico JavaScript
+  div(align="center")
+    h2 Entrada
+    br
+    #upload
+      input#select(type="file", accept=".js")
+    br
+    textarea#INPUT(placeholder="Escriba aquí. También puede arrastrar un fichero")
+    br
+    input#PARSE(type="button", value="Analizar")
+    br
+    br
+    #cajita
+      pre#OUTPUT.
+
+  #enlaces
+    a(href="./tests", target="_blank") Tests
+    br
+    a(href="https://github.com/alu0100696455/PL_P3_Analizador", target="_blank") GitHub
+    br
+    a(href="https://travis-ci.org/alu0100696455/PL_P3_Analizador", target="_blank") Travis
+  #autores
+    a(href="https://alu0100696455.github.io", target="_blank") Jonathan Exp&#243;sito Mart&#237;n
+    br
+    a(href="https://alu0100699968.github.io", target="_blank") Sergio J. Rodr&#237;guez Mart&#237;n

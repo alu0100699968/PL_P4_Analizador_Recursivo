@@ -2,6 +2,10 @@ doctype html
 html
   head
     title= title
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
+    script(src='/javascripts/main.coffee', type='text/coffeescript')
+    script(src='https://raw.githubusercontent.com/jashkenas/coffeescript/master/extras/coffee-script.js', type='text/javascript')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     block content
