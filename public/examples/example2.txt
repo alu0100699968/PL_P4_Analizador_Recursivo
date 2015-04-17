@@ -1,2 +1,2 @@
-a = 4*2;
-if a > 6 then p a
+while a == 4
+do b = 3
