@@ -7,6 +7,7 @@ html
     script(src='/javascripts/main.coffee', type='text/coffeescript')
     script(src='/javascripts/actions.coffee', type='text/coffeescript')
     script(src='https://raw.githubusercontent.com/jashkenas/coffeescript/master/extras/coffee-script.js', type='text/javascript')
+    script(src='https://raw.githubusercontent.com/TurnWheel/jReject/master/js/jquery.reject.js', type='text/javascript')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(type='text/javascript').
       function dump(fileName) {
@@ -19,12 +20,17 @@ html
         var file = evt.target.files[0];
         if (file) {
           var reader = new FileReader();
-          reader.onload = function(e) { 
+          reader.onload = function(e) {
             INPUT.innerHTML = e.target.result;
           }
           var c = reader.readAsText(file);
         }
         else { alert("Failed to load file"); }
+      }
+    script(type='text/javascript').
+      if(navigator.userAgent.toLowerCase().indexOf('firefox') <= -1)
+      {
+        window.alert("Esta versión del Analizador solo soporta Firefox.");
       }
   body
     block content

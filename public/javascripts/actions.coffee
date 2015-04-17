@@ -16,12 +16,14 @@ $(document).ready ->
       return
 
     reader.readAsText files[0], 'UTF-8'
+    evt.target.style.background = 'white'
     return
 
   handleDragOver = (evt) ->
     evt.stopPropagation()
     evt.preventDefault()
     evt.dataTransfer.dropEffect = 'copy'
+    evt.target.style.background = '#070433'
     return
 
   handleFileSelect = (evt) ->
